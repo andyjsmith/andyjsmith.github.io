@@ -46,13 +46,13 @@ Included Files
 This challenge deals with Exif data. Upon first look, there isn't anything visually unique about the photo. Some ways to start are to look for possible steganography or hidden data, but in this case the challenge is as simple as looking at the exif data. I used a tool called [Exiftool](https://www.sno.phy.queensu.ca/~phil/exiftool/) which can be easily installed in Kali with `apt install libimage-exiftool-perl`. For this challenge, the command usage is simply `exiftool [file]`.
 
 The lines `Comment` and `GPS Position` have what we need.
-{% highlight bash %}
+```shell
 root@kali:~/Downloads# exiftool image.jpg 
 ....
 Comment                         : "Your flag is flag_2_meta_4_me_<lat>_<lon>_f8ad. Now find the GPS coordinates of this image! (Degrees only please)"
 ....
 GPS Position                    : 91 deg 0' 0.00", 124 deg 0' 0.00"
-{% endhighlight bash %}
+```
 Combining these together, the flag is `flag_2_meta_4_me_91_124_f8ad`.
 
 
