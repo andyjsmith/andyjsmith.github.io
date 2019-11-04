@@ -11,7 +11,8 @@ dark_footer: false           # keep the footer dark
 # style: minimal             # use a simpler style inspired by the minima theme
 
 navigation:                  # site navigation in the header
-  - "https://ajsmith.us/"
+  - Homepage: "https://ajsmith.us/"
+  - Blog: "/"
   - Github: "http://github.com/andyjsmith/"
 
 #icons:                      # icons in the header, see http://fontawesome.com/icons
