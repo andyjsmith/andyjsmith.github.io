@@ -6,7 +6,7 @@ date: 2018-07-04 23:24:00
 
 This is an incomplete list of some useful security tools.
 
-### Forensics
+# Forensics
 [FTK Imager](https://accessdata.com/product-download)
 NTFS imager that lets you browse all data in an NTFS partition. Useful for discovering NTFS-specific data such as security IDs of computers a partition has been connected to.
 
@@ -28,11 +28,11 @@ Steganography tool for discovering files inside PNG and BMP images.
 [FLOSS](https://github.com/fireeye/flare-floss)
 FireEye Labs Obfuscated String Solver. Alternative to the normal `strings` command and automatically tries to deobfuscate strings in a binary or file.
 
-### Web Exploitation
+# Web Exploitation
 [SQLMap](http://sqlmap.org/)
 Automatic SQL injection
 
-### Reverse Engineering
+# Reverse Engineering
 [OllyDBG](http://www.ollydbg.de/)
 Binary code analyzer and disassembler
 
