@@ -8,6 +8,7 @@ author: Andy Smith
 ![c3_employee_knowledgebase.png](/assets/images/metactf/c3_employee_knowledgebase.png)
 In this problem we're given a login page and need to access the internal wiki. Trying to browse to the wiki gives a 302 Found redirect with a header `Location: ./?error=unauthorized&source=./knowledgebase.php`. Chrome happily follows this redirect and does not display any information in the response body, however if we use a command line tool like `curl` we can just ignore this redirect. Running `curl https://problems.metactf.com/content/logout-protected/knowledgebase.php` we get the contents of the wiki. Scrolling through the lorem ipsum text, we can find `<b>MetaCTF Flag: rest_in_peace_php_die_function</b>`. 
 
+---
 
 ## Lab Equipment Reservation
 ![lab_equipment_1.png](/assets/images/metactf/lab_equipment_1.png)
@@ -62,6 +63,7 @@ Running these two commands separately and then concatenating the two values from
 
 ![lab_equipment_5.png](/assets/images/metactf/lab_equipment_5.png)
 
+---
 
 ## Josh's Sleek Blog
 ![sleek_1.png](/assets/images/metactf/sleek_1.png)
@@ -120,3 +122,8 @@ document.cookie = "SLEEK_BLOG_SID=541a8fe437325df4a9ae026ad2cfa376"
 Navigating to the homepage, the blog shows us the flag `c4nt_fa11_4_ph1shing_scam5_1f_u_d0nt_ch3ck_y0ur_3ma1l`
 
 ![sleek_6.png](/assets/images/metactf/sleek_6.png)
+
+---
+
+# Cryptography
+## RSA 0.5
