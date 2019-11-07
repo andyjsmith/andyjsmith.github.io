@@ -1,6 +1,7 @@
 ---
 title: MetaCTF 2019 Writeups
 author: Andy Smith
+mathjax: true
 ---
 
 # Web Exploitation
@@ -138,7 +139,9 @@ def Encrypt(plaintext, key):
 ```
 
 Basic RSA uses the following equation to encrypt a message `m` with encryption key `e`:
-$ c = m^{e}{\pmod {n}} $
+
+$$ c = m^{e}{\pmod {n}} $$
+
 Notice that m is to the power of e. In the Python code provided, the plaintext is only multiplied by the key: `(plaintext_value * key) % modulus`. This will dramatically reduce the size of the integer this equals before using the modulus. If this integer is less than the modulus, then modulus can be effectively ignored, meaning it is just `ciphertext = plaintext_value * key` and the key is now a symmetric key. To verify this, I converted the sample.out hex value to an integer, and it is 423 bits which is less than the 513 of the modulus, so the modulus can be ignored. Solving this equation for the key, `key = ciphertext / plaintext_value`. Opening a Python interactive shell, we can do this computation with the sample.in and sample.out.
 
 ```python
