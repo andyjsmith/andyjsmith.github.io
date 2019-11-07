@@ -7,14 +7,14 @@ mathjax: true
 These are my solutions to a few problems from the MetaCTF 2019 competition at UVA.
 
 Web Exploitation
-* [Logout-Protected Pages (300pts)](#Logout-Protected-Pages-(300pts))
+* [Logout-Protected Pages (300pts)](#logout-protected-pages-300pts)
 
-* [Satisfactory Qabalistic Laboratories (325pts)](#Satisfactory-Qabalistic-Laboratories-(325pts))
+* [Satisfactory Qabalistic Laboratories (325pts)](#satisfactory-qabalistic-laboratories-325pts)
 
-* [Cross Blog Scripting (400pts)](#Cross-Blog-Scripting-(400pts))
+* [Cross Blog Scripting (400pts)](#cross-blog-scripting-400pts)
 
 Cryptography
-* [RSA 0.5 (375pts)](#RSA-0.5-(375pts))
+* [RSA 0.5 (375pts)](#rsa-05-375pts)
 
 
 # Web Exploitation
