@@ -4,14 +4,27 @@ author: Andy Smith
 mathjax: true
 ---
 
+These are my solutions to a few of the problems from the MetaCTF 2019 competition at UVA.
+
+Web Exploitation
+* [Logout-Protected Pages (300pts)](#Logout-Protected-Pages-(300pts))
+
+* [Satisfactory Qabalistic Laboratories (325pts)](#Satisfactory-Qabalistic-Laboratories-(325pts))
+
+* [Cross Blog Scripting (400pts)](#Cross-Blog-Scripting-(400pts))
+
+Cryptography
+* [RSA 0.5 (375pts)](#RSA-0.5-(375pts))
+
+
 # Web Exploitation
-## C3 Internal Knowledge Base
+## Logout-Protected Pages (300pts)
 ![c3_employee_knowledgebase.png](/assets/images/metactf/c3_employee_knowledgebase.png)
 In this problem we're given a login page and need to access the internal wiki. Trying to browse to the wiki gives a 302 Found redirect with a header `Location: ./?error=unauthorized&source=./knowledgebase.php`. Chrome happily follows this redirect and does not display any information in the response body, however if we use a command line tool like `curl` we can just ignore this redirect. Running `curl https://problems.metactf.com/content/logout-protected/knowledgebase.php` we get the contents of the wiki. Scrolling through the lorem ipsum text, we can find `<b>MetaCTF Flag: rest_in_peace_php_die_function</b>`. 
 
 ---
 
-## Lab Equipment Reservation
+## Satisfactory Qabalistic Laboratories (325pts)
 ![lab_equipment_1.png](/assets/images/metactf/lab_equipment_1.png)
 
 This problem starts off looking similar to the previous. Based on the URL (https://problems.metactf.com/content/sq-labs-nb) this is probably a SQL injection challenge. I tried the login page first but the username and password fields appeared to not be injectable. There is however another page, and it has a search box.
@@ -66,7 +79,7 @@ Running these two commands separately and then concatenating the two values from
 
 ---
 
-## Josh's Sleek Blog
+## Cross Blog Scripting (400pts)
 ![sleek_1.png](/assets/images/metactf/sleek_1.png)
 
 This problem shows an input box to post on Josh's Sleek Blog. Posting some bogus data along with some HTML, we see that HTML is being escaped and script tags don't appear to work.
@@ -127,7 +140,7 @@ Navigating to the homepage, the blog shows us the flag `c4nt_fa11_4_ph1shing_sca
 ---
 
 # Cryptography
-## RSA 0.5
+## RSA 0.5 (375pts)
 Included files: [rsa05.zip](/assets/images/metactf/rsa05.zip)
 
 We're given a sample.in and sample.out file along with flag.out. The out files are encrypted with a trivial implementation of RSA seen in the `RSA 0.5.py` file. Looking through this code, there are two important items to note. First, the modulus being used is 2^512, which uses 513 bits. Given RSA needs to use much larger numbers than symmetric crypto, the large size of this modulus is not surprising. However, the second key part to note is the encrypt function:
