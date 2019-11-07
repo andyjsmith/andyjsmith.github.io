@@ -127,3 +127,53 @@ Navigating to the homepage, the blog shows us the flag `c4nt_fa11_4_ph1shing_sca
 
 # Cryptography
 ## RSA 0.5
+Included files: [rsa05.zip](/assets/images/metactf/rsa05.zip)
+
+We're given a sample.in and sample.out file along with flag.out. The out files are encrypted with a trivial implementation of RSA seen in the `RSA 0.5.py` file. Looking through this code, there are two important items to note. First, the modulus being used is 2^512, which uses 513 bits. Given RSA needs to use much larger numbers than symmetric crypto, the large size of this modulus is not surprising. However, the second key part to note is the encrypt function:
+```python
+def Encrypt(plaintext, key):
+    plaintext_value = int(binascii.hexlify(bytes(plaintext, 'ascii')), 16)
+    
+    return hex((plaintext_value * key) % modulus)
+```
+
+Basic RSA uses the following equation to encrypt a message `m` with encryption key `e`:
+$ c = m^{e}{\pmod {n}} $
+Notice that m is to the power of e. In the Python code provided, the plaintext is only multiplied by the key: `(plaintext_value * key) % modulus`. This will dramatically reduce the size of the integer this equals before using the modulus. If this integer is less than the modulus, then modulus can be effectively ignored, meaning it is just `ciphertext = plaintext_value * key` and the key is now a symmetric key. To verify this, I converted the sample.out hex value to an integer, and it is 423 bits which is less than the 513 of the modulus, so the modulus can be ignored. Solving this equation for the key, `key = ciphertext / plaintext_value`. Opening a Python interactive shell, we can do this computation with the sample.in and sample.out.
+
+```python
+>>> import binascii
+>>> plaintext = "SUPER_SECRET_MESSAGE_TO_ENCODE"
+>>> ciphertext = "4bc91ba3b7c7bc5221902221fdfecace396d40468a66c1bf3fe51bdfbaf2c63d532234278f4915098f4e61b6913ba7576ded22a80f"
+>>> plaintext_value = int(binascii.hexlify(bytes(plaintext, 'ascii')), 16)
+>>> ciphertext_value = int(ciphertext, 16)
+>>> ciphertext_value // plaintext_value
+22299104256150897389636655802354612886708315886735999555
+```
+
+Dividing the ciphertext integer by the plaintext integer gives us the key. Let's test to make sure this is the correct key by running `RSA 0.5.py` with the sample.out:
+```
+What would you like to do?
+1: Encrypt
+2: Decrypt
+3: Exit
+Enter a number to continue. 2
+What is your key? 22299104256150897389636655802354612886708315886735999555
+What do you want to decrypt? 0x4bc91ba3b7c7bc5221902221fdfecace396d40468a66c1bf3fe51bdfbaf2c63d532234278f4915098f4e61b6913ba7576ded22a80f
+Your plaintext is SUPER_SECRET_MESSAGE_TO_ENCODE
+```
+
+Awesome, it decrypted successfully. Assuming the same encryption key was used to encrypt the flag, we can run the script again with the value of flag.out:
+
+```
+What would you like to do?
+1: Encrypt
+2: Decrypt
+3: Exit
+Enter a number to continue. 2
+What is your key? 22299104256150897389636655802354612886708315886735999555
+What do you want to decrypt? 0x5a3495161f9c9f4e356ccad7494fb56262ab638e2a864a07f0569e36f931affdde1fed51d4326f312b77d90b9c4396db7404a03a2fb87ff4a3
+Your plaintext is c0ngr@t5_y0u_goT_hAlf_oF_RS@_DOWN!
+```
+
+We get the flag, `c0ngr@t5_y0u_goT_hAlf_oF_RS@_DOWN!`
