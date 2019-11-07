@@ -4,7 +4,7 @@ author: Andy Smith
 mathjax: true
 ---
 
-These are my solutions to a few of the problems from the MetaCTF 2019 competition at UVA.
+These are my solutions to a few problems from the MetaCTF 2019 competition at UVA.
 
 Web Exploitation
 * [Logout-Protected Pages (300pts)](#Logout-Protected-Pages-(300pts))
